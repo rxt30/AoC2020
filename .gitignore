@@ -1,0 +1,6 @@
+*
+!*.py
+!*.java
+!*.txt
+!.gitignore
+!*/

@@ -56,10 +56,7 @@ public class ValidCheck{
         switch(keyValuePair[0].trim()){
             case "byr": case "iyr": case "eyr": return checkYear(keyValuePair);
             case "hgt": return checkHeight(keyValuePair[1]);
-            case "hcl": if(keyValuePair[1].matches("#[0-f]{6}")){
-                        System.out.println("Haircolor good");
-                        return true;
-            }
+            case "hcl": return keyValuePair[1].matches("#[0-f]{6}");
             case "ecl": return checkEyeColor(keyValuePair[1]);
             case "pid": return (keyValuePair[1].length() == 9);
             case "cid": return true;

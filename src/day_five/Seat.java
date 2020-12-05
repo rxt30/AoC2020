@@ -29,7 +29,7 @@ public class Seat{
         }
     }
 
-    public int getSeatID(){
+    public Integer getSeatID(){
         return seatID;
     }
 }

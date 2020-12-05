@@ -3,9 +3,10 @@ package day_five;
 import java.util.*;
 import aocUtils.FileReader;
 
+
 public class Main{
     private Vector<String> fileContent;
-    private Vector<Seat> seatList = new Vector<Seat>();
+    private List<Seat> seatList = new Vector<Seat>();
 
     public static void main(String[] args){
         Main main = new Main();
@@ -17,21 +18,26 @@ public class Main{
         fileContent = fileReader.readFile();
         createSeats();
         getHighestSeat();
+        getPersonalSeat();
     }
 
     private void createSeats(){
         for(int i = 0; i < fileContent.size();i++){
             seatList.add(new Seat(fileContent.get(i))); 
         }
+        Comparator<Seat> seatsByID = (Seat seat1, Seat seat2) -> seat1.getSeatID().compareTo(seat2.getSeatID());
+        seatList.sort(seatsByID);
     }
 
     private void getHighestSeat(){
-        int highestSeatNumber = 0;
-        int currentSeatID = 0;
-        for(int i = 0; i < seatList.size();i++){
-            currentSeatID = seatList.get(i).getSeatID();
-            if(currentSeatID > highestSeatNumber) highestSeatNumber = currentSeatID;
+        System.out.println(seatList.get(seatList.size()-1).getSeatID());
+    }
+
+    private void getPersonalSeat(){
+        for(int i = 0; i < seatList.size() - 1;i++){
+            if(seatList.get(i+1).getSeatID() - seatList.get(i).getSeatID() > 1){
+                System.out.println(seatList.get(i).getSeatID()+1);
+            }
         }
-        System.out.println(highestSeatNumber);
     }
 }

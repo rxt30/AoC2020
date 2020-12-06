@@ -23,6 +23,8 @@ public class FileReader{
         }catch(IOException e){
             e.printStackTrace();
         }
+        fileScanner.close();
+        fileStream.close();
         return fileContent;
     }
 }

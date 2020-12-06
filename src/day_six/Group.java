@@ -3,9 +3,9 @@ package day_six;
 import java.util.*;
 
 public class Group{
-    ArrayList<String>answersGiven = new ArrayList<String>();
-    Set<String> uniqueAnswers = new HashSet<String>();
-    int memberCount = 0;
+    private ArrayList<String>answersGiven = new ArrayList<String>();
+    private Set<String> uniqueAnswers = new HashSet<String>();
+    private int memberCount = 0;
 
     public Group(String answers,int memberCount){
         getAnswers(answers);
@@ -30,8 +30,6 @@ public class Group{
                 commonAnswer++;
             }
         }
-        System.out.println(commonAnswer);
-        System.out.println(uniqueAnswers.toString());
         return commonAnswer;
     }
 

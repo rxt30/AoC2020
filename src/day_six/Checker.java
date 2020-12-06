@@ -4,8 +4,8 @@ import aocUtils.FileReader;
 import java.util.*;
 
 public class Checker{
-    Vector<String> fileContent; 
-    ArrayList<Group> groupAnswers = new ArrayList<Group>();
+    private Vector<String> fileContent; 
+    private ArrayList<Group> groupAnswers = new ArrayList<Group>();
 
     public static void main(String[] args){
         Checker main = new Checker();
@@ -13,7 +13,7 @@ public class Checker{
     }
 
     private void startProcess(){
-        FileReader fileReader = new FileReader("files/answers.txt");
+        final FileReader fileReader = new FileReader("files/answers.txt");
         fileContent = fileReader.readFile();
         analyzeFile();
         getCount();

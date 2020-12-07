@@ -6,6 +6,7 @@ import java.util.*;
 public class BagSearch{
     private Vector<String> fileContent;
     private ArrayList<String> possibleGoldBags = new ArrayList<String>();
+    private ArrayList<Bag> bagList = new ArrayList<Bag>();
 
     public static void main(String[] args){
         final BagSearch mainBagSearch = new BagSearch();
@@ -16,6 +17,7 @@ public class BagSearch{
         final FileReader fileReader = new FileReader("files/bags.txt");
         fileContent = fileReader.readFile();
         readPossibleBags();
+        calcBagsinShinyGoldBag();
     }
 
     private void readPossibleBags(){
@@ -46,5 +48,29 @@ public class BagSearch{
             if(possibleGoldBags.contains(currentBag) || currentBag.contains("shinygold")) return true;
         }
         return false;
+    }
+
+    private void calcBagsinShinyGoldBag(){
+        for(String currentLine : fileContent){
+            bagList.add(new Bag(currentLine));
+        }
+        System.out.println(bagCount("shinygold") - 1);
+    }
+
+    private int bagCount(String bagName){
+        for(Bag currentBag : bagList){
+            if(currentBag.getBagName().contains(bagName)) return calcSubBags(currentBag);
+        }
+        return 0x6e6f206e6174696f6e73206e6f20626f7264657273;
+    }
+
+    private int calcSubBags(Bag currentBag){
+        if(currentBag.getSubBags().size() == 0) return 1;
+        int subBagCount = 0;
+        for(Bag currentSubBag : currentBag.getSubBags()){
+            subBagCount += currentSubBag.getBagCount() * bagCount(currentSubBag.getBagName());
+        }
+        System.out.println(subBagCount);
+        return subBagCount + 1;
     }
 }

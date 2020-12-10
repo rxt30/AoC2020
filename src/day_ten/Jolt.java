@@ -6,6 +6,7 @@ import java.util.*;
 public class Jolt{
     private ArrayList<Integer> joints = new ArrayList<Integer>();
     private Vector<String> fileContent;
+    private int combinationsCounter = 0;
 
     public static void main(String[] args){
         Jolt main = new Jolt();
@@ -17,6 +18,8 @@ public class Jolt{
         fileContent = fileReader.readFile();
         sortFileContent();
         calculateJoltDifferences();
+        findAllCombinations(0);
+        System.out.println(combinationsCounter);
     }
 
     private void sortFileContent(){
@@ -37,6 +40,19 @@ public class Jolt{
            }
         }
         System.out.println(singleCounter);
+    }
+    
+    private void findAllCombinations(int start){
+        long[] nodes = new long[joints.size()];
+        nodes[0] = 1;
+        for(int i = 1; i < joints.size(); i++){
+            for(int j = i - 3;j < i; j++){
+                if( j >= 0 && joints.get(i) - joints.get(j) <= 3){
+                    nodes[i] += nodes[j];
+                }
+            }
+        }
+        System.out.println(nodes[nodes.length-1]);
     }
 
 }
